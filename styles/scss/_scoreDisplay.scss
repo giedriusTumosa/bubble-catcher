@@ -1,0 +1,31 @@
+.scoreDisplay {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: center;
+  text-align: center;
+  position: relative;
+  z-index: 100;
+  background-color: #7500a3;
+  color: #f5f5f5;
+  border-radius: 5px 0px 0px 5px;
+
+  .scoreValue {
+    font-size: 2rem;
+  }
+  button {
+    cursor: pointer;
+    border-radius: 5px;
+    width: 70px;
+    height: 30px;
+    border: none;
+  }
+
+  .checkBoxRotationWrapper,
+  .checkBoxCondensatorWrapper {
+    display: flex;
+    flex-flow: column;
+    gap: 1rem;
+  }
+}

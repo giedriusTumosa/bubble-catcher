@@ -1,0 +1,47 @@
+.bubble {
+  width: 20px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  cursor: pointer;
+  position: absolute;
+  transform-origin: left top;
+  animation: opacityChange 3s linear infinite;
+  transition: all 0.5s ease-in;
+
+  &:active {
+    box-shadow: inset 2px 2px 2px 0px #000000bf;
+  }
+}
+
+.rotationAnimation {
+  animation: rotationStart 3s linear infinite;
+}
+
+@keyframes opacityChange {
+  0% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.5;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes rotationStart {
+  0% {
+    rotate: (0deg);
+  }
+  25% {
+  }
+  50% {
+    rotate: (180deg);
+  }
+  75% {
+  }
+  100% {
+    rotate: (360deg);
+  }
+}

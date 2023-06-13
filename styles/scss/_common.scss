@@ -1,0 +1,16 @@
+@import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700&display=swap");
+
+html,
+input,
+label,
+button {
+  font-family: "Nunito Sans", sans-serif;
+}
+body {
+  height: 100vh;
+}
+.app {
+  height: 100%;
+  display: grid;
+  grid-template-columns: 1fr 150px;
+}
