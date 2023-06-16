@@ -21,8 +21,9 @@ app.addEventListener("click", (e) => {
     !e.target.classList.contains("clicked")
   ) {
     const clickedBubble = e.target;
+    const bubbleDiameterInPx = e.target.getBoundingClientRect().width;
     clickedBubble.remove();
-    scoreDisplay.increaseScore();
+    scoreDisplay.increaseScore(bubbleDiameterInPx);
     clickedBubble.classList.add("clicked");
   }
 
@@ -30,14 +31,14 @@ app.addEventListener("click", (e) => {
     bubblePopUpIntervalId = setInterval(() => {
       const bubble = new Bubble(bubbleNumber);
       bubblesBoxElement.append(bubble.render());
-      bubbleBox.existingBubbles.push({
-        x: bubble.bubblePositionX,
-        y: bubble.bubblePositionY,
-      });
     }, 100);
   }
   if (e.target.classList.contains("buttonGameStop")) {
     clearInterval(bubblePopUpIntervalId);
+    const bubblesAll = document.querySelectorAll(".bubble");
+    bubblesAll?.forEach((bubble) => {
+      console.log("diameter", bubble.bubbleDiameter);
+    });
   }
 });
 
@@ -46,23 +47,24 @@ app.addEventListener("change", (e) => {
     const bubblesAll = document.querySelectorAll(".bubble");
     if (e.target.checked) {
       bubblesAll?.forEach((bubble) => {
-        !bubble.classList.contains("rotationAnimation") &&
-          bubble.classList.add("rotationAnimation");
+        !bubble.classList.contains("rotationAnimationA") &&
+          bubble.classList.add("rotationAnimationA");
       });
-      Bubble.bubblesAreFloating = true;
+      BubbleState.bubblesAreFloating = true;
     } else {
       bubblesAll?.forEach((bubble) => {
-        bubble.classList.contains("rotationAnimation") &&
-          bubble.classList.remove("rotationAnimation");
+        const rotationSide = Math.ceil(Math.random() + 1);
+        bubble.classList.contains("rotationAnimationA") &&
+          bubble.classList.remove("rotationAnimationA");
       });
-      Bubble.bubblesAreFloating = false;
+      BubbleState.bubblesAreFloating = false;
     }
   }
   if (e.target.name === "condensatorCheckbox") {
     if (e.target.checked) {
-      BubblesBox.bubblesCondenseOnClick = true;
+      BubbleState.bubblesCondenseOnClick = true;
     } else {
-      BubblesBox.bubblesCondenseOnClick = false;
+      BubbleState.bubblesCondenseOnClick = false;
     }
   }
 });
@@ -76,5 +78,5 @@ app.addEventListener("change", (e) => {
 //   });
 // });
 
-// TODO: score priklauso nuo burbuliuko dydzio, kuo mazesnis, tuo didesnis score
 // TODO: random special bubbles with high scores need to appear
+// TODO: gravitacija, kad gravituotu tam tikri bublai link kitu tam tikru bublu

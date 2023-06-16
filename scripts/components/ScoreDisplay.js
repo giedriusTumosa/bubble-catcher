@@ -1,17 +1,16 @@
-import Bubble from "./Bubble.js";
-import BubblesBox from "./BubblesBox.js";
+import BubbleState from "../BubbleState.js";
+import { MAX_BUBBLE_DIAMETER } from "./Bubble.js";
 
 export default class ScoreDisplay {
   constructor() {
-    this._score = 0;
+    this.capturedBubblesCount = 0;
+    this.score = 0;
   }
 
-  get score() {
-    return this._score;
-  }
-
-  increaseScore() {
-    this._score++;
+  increaseScore(bubbleDiameter, minimumScoreGain = 10) {
+    this.capturedBubblesCount++;
+    this.score +=
+      minimumScoreGain + MAX_BUBBLE_DIAMETER - bubbleDiameter.toFixed();
     this.render();
   }
   render() {
@@ -26,12 +25,22 @@ export default class ScoreDisplay {
     this.text = document.createTextNode("BUBBLES CAPTURED:");
     this.scoreDisplayElement.append(this.text);
 
-    this.scoreValue = document.createElement("p");
-    this.scoreValue.setAttribute("class", "scoreValue");
+    this.capturedBubbleCountValue = document.createElement("p");
+    this.capturedBubbleCountValue.setAttribute("class", "achievedValue");
 
-    this.text = document.createTextNode(`${this._score}`);
-    this.scoreValue.append(this.text);
-    this.scoreDisplayElement.append(this.scoreValue);
+    this.text = document.createTextNode(`${this.capturedBubblesCount}`);
+    this.capturedBubbleCountValue.append(this.text);
+
+    this.bubbleScoreValue = document.createElement("p");
+    this.bubbleScoreValue.setAttribute("class", "achievedValue");
+
+    this.text = document.createTextNode(`SCORE: ${this.score}`);
+    this.bubbleScoreValue.append(this.text);
+
+    this.scoreDisplayElement.append(
+      this.capturedBubbleCountValue,
+      this.bubbleScoreValue
+    );
 
     // Launch button
 
@@ -57,7 +66,7 @@ export default class ScoreDisplay {
     this.checkBoxRotation.setAttribute("id", "rotationCheckbox");
     this.checkBoxRotation.setAttribute("name", "rotationCheckbox");
     this.checkBoxRotation.setAttribute("type", "checkbox");
-    Bubble.bubblesAreFloating
+    BubbleState.bubblesAreFloating
       ? this.checkBoxRotation.setAttribute("checked", "checked")
       : this.checkBoxRotation.removeAttribute("checked");
 
@@ -81,7 +90,7 @@ export default class ScoreDisplay {
     this.checkBoxCondensator.setAttribute("id", "condensatorCheckbox");
     this.checkBoxCondensator.setAttribute("name", "condensatorCheckbox");
     this.checkBoxCondensator.setAttribute("type", "checkbox");
-    BubblesBox.bubblesCondenseOnClick
+    BubbleState.bubblesCondenseOnClick
       ? this.checkBoxCondensator.setAttribute("checked", "checked")
       : this.checkBoxCondensator.removeAttribute("checked");
 

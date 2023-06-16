@@ -36,8 +36,12 @@ body {
   box-shadow: inset 2px 2px 2px 0px rgba(0, 0, 0, 0.7490196078);
 }
 
-.rotationAnimation {
-  animation: rotationStart 3s linear infinite;
+.rotationAnimationA {
+  animation: rotationStartA 3s linear infinite;
+}
+
+.rotationAnimationB {
+  animation: rotationStartA 2s linear infinite;
 }
 
 @keyframes opacityChange {
@@ -51,7 +55,7 @@ body {
     opacity: 1;
   }
 }
-@keyframes rotationStart {
+@keyframes rotationStartA {
   0% {
     rotate: 0deg;
   }
@@ -60,6 +64,17 @@ body {
   }
   100% {
     rotate: 360deg;
+  }
+}
+@keyframes rotationStartB {
+  0% {
+    rotate: 0deg;
+  }
+  50% {
+    rotate: -180deg;
+  }
+  100% {
+    rotate: -360deg;
   }
 }
 .bubblesBox {
@@ -81,9 +96,9 @@ body {
   z-index: 100;
   background-color: #7500a3;
   color: #f5f5f5;
-  border-radius: 5px 0px 0px 5px;
+  border-radius: 10px 0px 0px 10px;
 }
-.scoreDisplay .scoreValue {
+.scoreDisplay .achievedValue {
   font-size: 2rem;
 }
 .scoreDisplay button {

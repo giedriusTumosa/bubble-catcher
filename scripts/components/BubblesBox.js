@@ -1,9 +1,10 @@
+import BubbleState from "../BubbleState.js";
+
 export default class BubblesBox {
-  static bubblesCondenseOnClick = false;
   constructor() {
     this.existingBubbles = [];
     this.moleculesCoordinate = [];
-    this.bubblesCondenseOnClick = BubblesBox.bubblesCondenseOnClick;
+    this.bubblesCondenseOnClick = BubbleState.bubblesCondenseOnClick;
   }
   render() {
     // Reset
@@ -31,7 +32,7 @@ export default class BubblesBox {
   }
 
   condenseOnClick(e) {
-    if (!BubblesBox.bubblesCondenseOnClick) return;
+    if (!BubbleState.bubblesCondenseOnClick) return;
     const mouseCoordinates = { x: e.clientX, y: e.clientY };
     const bubblesAll = document.querySelectorAll(".bubble");
     bubblesAll.forEach((bubble) => {
@@ -43,7 +44,7 @@ export default class BubblesBox {
     });
   }
   condenseOnDoubleClick(e) {
-    if (!BubblesBox.bubblesCondenseOnClick) return;
+    if (!BubbleState.bubblesCondenseOnClick) return;
     const mouseCoordinates = { x: e.clientX, y: e.clientY };
     const bubblesAll = document.querySelectorAll(".bubble");
     bubblesAll.forEach((bubble) => {

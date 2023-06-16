@@ -1,10 +1,11 @@
-const MAX_BUBBLE_DIAMETER = 50;
-const MIN_BUBBLE_DIAMETER = 20;
+import BubbleState from "../BubbleState.js";
+
+export const MAX_BUBBLE_DIAMETER = 100;
+export const MIN_BUBBLE_DIAMETER = 20;
 const PADDING = 100;
 const MAX_RGB_COLOR_VALUE = 255;
 
 export default class Bubble {
-  static bubblesAreFloating = false;
   constructor() {
     this.bubblePositionX = 0;
     this.bubblePositionY = 0;
@@ -18,15 +19,16 @@ export default class Bubble {
     this.bubbleElement = document.createElement("div");
     this.bubbleElement.setAttribute("class", "bubble");
 
-    Bubble.bubblesAreFloating &&
-      !this.bubbleElement.classList.contains("rotationAnimation") &&
-      this.bubbleElement.classList.add("rotationAnimation");
+    BubbleState.bubblesAreFloating &&
+      !this.bubbleElement.classList.contains("rotationAnimationA") &&
+      this.bubbleElement.classList.add("rotationAnimationA");
 
     this.bubbleWrapper.append(this.bubbleElement);
 
     this.setWidth();
     this.colorize();
     this.setPosition();
+
     return this.bubbleWrapper;
   }
   colorize() {
@@ -84,8 +86,10 @@ export default class Bubble {
   }
   setWidth() {
     const bubbleDiameter = Math.ceil(
-      Math.random() * MAX_BUBBLE_DIAMETER + MIN_BUBBLE_DIAMETER
+      Math.random() * (MAX_BUBBLE_DIAMETER - MIN_BUBBLE_DIAMETER) +
+        MIN_BUBBLE_DIAMETER
     );
+    console.log(bubbleDiameter);
     this.bubbleElement.style.setProperty("width", `${bubbleDiameter}px`);
     this.bubbleDiameter = bubbleDiameter;
   }

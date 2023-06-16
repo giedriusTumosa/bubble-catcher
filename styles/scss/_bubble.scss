@@ -13,8 +13,11 @@
   }
 }
 
-.rotationAnimation {
-  animation: rotationStart 3s linear infinite;
+.rotationAnimationA {
+  animation: rotationStartA 3s linear infinite;
+}
+.rotationAnimationB {
+  animation: rotationStartA 2s linear infinite;
 }
 
 @keyframes opacityChange {
@@ -30,7 +33,7 @@
     opacity: 1;
   }
 }
-@keyframes rotationStart {
+@keyframes rotationStartA {
   0% {
     rotate: (0deg);
   }
@@ -43,5 +46,18 @@
   }
   100% {
     rotate: (360deg);
+  }
+}
+
+@keyframes rotationStartB {
+  0% {
+    rotate: (0deg);
+  }
+  50% {
+    rotate: (-180deg);
+  }
+
+  100% {
+    rotate: (-360deg);
   }
 }
