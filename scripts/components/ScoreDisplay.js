@@ -5,6 +5,7 @@ export default class ScoreDisplay {
   constructor() {
     this.capturedBubblesCount = 0;
     this.score = 0;
+    this.generatedBubblesCount = 0;
   }
 
   increaseScore(bubbleDiameter, minimumScoreGain = 10) {
@@ -13,6 +14,12 @@ export default class ScoreDisplay {
       minimumScoreGain + MAX_BUBBLE_DIAMETER - bubbleDiameter.toFixed();
     this.render();
   }
+  increaseBubbleCount() {
+    this.generatedBubblesCount++;
+    this.scoreDisplayElement.removeChild(this.generatedBubblesCountElement);
+    this.scoreDisplayElement.append(this.renderGeneratedBubblesCountElement());
+  }
+
   render() {
     const app = document.querySelector(".app");
     // Reset
@@ -20,6 +27,7 @@ export default class ScoreDisplay {
     existingScoreDisplay && existingScoreDisplay.remove();
 
     // Generate element
+
     this.scoreDisplayElement = document.createElement("p");
     this.scoreDisplayElement.setAttribute("class", "scoreDisplay");
     this.text = document.createTextNode("BUBBLES CAPTURED:");
@@ -90,6 +98,7 @@ export default class ScoreDisplay {
     this.checkBoxCondensator.setAttribute("id", "condensatorCheckbox");
     this.checkBoxCondensator.setAttribute("name", "condensatorCheckbox");
     this.checkBoxCondensator.setAttribute("type", "checkbox");
+
     BubbleState.bubblesCondenseOnClick
       ? this.checkBoxCondensator.setAttribute("checked", "checked")
       : this.checkBoxCondensator.removeAttribute("checked");
@@ -103,15 +112,26 @@ export default class ScoreDisplay {
       this.checkBoxCondensator
     );
 
+    this.renderGeneratedBubblesCountElement();
     // Appends
     this.scoreDisplayElement.append(
       this.gameLaunchButton,
       this.gameStopButton,
       this.checkBoxRotationWrapper,
-      this.checkBoxCondensatorWrapper
+      this.checkBoxCondensatorWrapper,
+      this.generatedBubblesCountElement
     );
 
     app.append(this.scoreDisplayElement);
     return this.scoreDisplayElement;
+  }
+  renderGeneratedBubblesCountElement() {
+    this.generatedBubblesCountElement = document.createElement("p");
+    this.generatedBubblesCountElement.setAttribute(
+      "class",
+      "overallBubbleCount"
+    );
+    this.generatedBubblesCountElement.innerHTML = `Bubbles: ${this.generatedBubblesCount}`;
+    return this.generatedBubblesCountElement;
   }
 }

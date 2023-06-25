@@ -72,6 +72,7 @@ export default class Bubble {
           MAX_BUBBLE_DIAMETER * 2) +
         PADDING
     );
+
     this.bubblePositionY = Math.floor(
       Math.random() *
         (bubblesBoxRectInfo.height -
@@ -89,7 +90,6 @@ export default class Bubble {
       Math.random() * (MAX_BUBBLE_DIAMETER - MIN_BUBBLE_DIAMETER) +
         MIN_BUBBLE_DIAMETER
     );
-    console.log(bubbleDiameter);
     this.bubbleElement.style.setProperty("width", `${bubbleDiameter}px`);
     this.bubbleDiameter = bubbleDiameter;
   }

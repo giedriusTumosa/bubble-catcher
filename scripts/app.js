@@ -31,14 +31,14 @@ app.addEventListener("click", (e) => {
     bubblePopUpIntervalId = setInterval(() => {
       const bubble = new Bubble(bubbleNumber);
       bubblesBoxElement.append(bubble.render());
+      BubbleState.numberOfBubblesGenerated++;
+      scoreDisplay.increaseBubbleCount();
     }, 100);
   }
+
   if (e.target.classList.contains("buttonGameStop")) {
     clearInterval(bubblePopUpIntervalId);
     const bubblesAll = document.querySelectorAll(".bubble");
-    bubblesAll?.forEach((bubble) => {
-      console.log("diameter", bubble.bubbleDiameter);
-    });
   }
 });
 
